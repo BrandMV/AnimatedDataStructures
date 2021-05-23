@@ -1,3 +1,4 @@
+
 const pushButton = document.getElementById("pushButton");
 const createButton = document.getElementById("createButton");
 const popButton = document.getElementById("popButton");
@@ -5,6 +6,8 @@ const canvas = document.getElementById("canvas");
 const canvasContext = canvas.getContext("2d");
 const saveButton = document.getElementById("saveButton")
 const loadButton = document.getElementById("loadButton")
+const cCode = document.getElementById("cCode")
+const newButton = document.getElementById("newButton")
 let stack = [];
 let stackNodeValue = 0;
 const nodeSize = 25;
@@ -22,7 +25,7 @@ canvasContext.fillStyle='white'
 canvasContext.fill()
 
 const drawNode = () => {
-    canvasContext.fillText("", nodeX - 18, nodeY + 10);
+    // canvasContext.fillText("", nodeX - 18, nodeY + 10);
 
 
   if (stack.length < 2) {
@@ -52,7 +55,9 @@ const drawNode = () => {
     canvasContext.moveTo(x, y + 50);
     canvasContext.lineTo(x + 10, y + 40);
     canvasContext.stroke();
+
   }
+
 };
 
 const drawStack = (stack) => {
@@ -110,13 +115,16 @@ const drawStack = (stack) => {
 };
 
 createButton.addEventListener("click", (e) => {
-    if(stack.length > 9){
+    if(stack.length > 7){
         alert("La pila esta llena, no puedes agregar más nodos")
         return
     }
   e.preventDefault();
+
   stackNodeValue = document.getElementById("stackNodeValue").value; //obtenemos el valor del nodo
   //   console.log(stackNodeValue);
+  pushButton.className="btn"
+  document.getElementById("stackNodeValue").className="hide"
 
   console.log(stack.length);
   if (stack.length < 1) {
@@ -150,30 +158,28 @@ createButton.addEventListener("click", (e) => {
     pushButton.disabled = false
 
   }
-});
-
-pushButton.addEventListener("click", (e) => {
-  e.preventDefault();
-//   let drawNodeFrame = window.requestAnimationFrame(drawNode);
   let drawNodeInterval = setInterval(() => {
     if (x != nodeX) x = x - 1;
     else if (y != nodeY) y = y + 1;
     if (x == nodeX && y == nodeY) {
+      canvasContext.clearRect(600,0, canvasWidth, canvasHeight)
+
+      clearInterval(drawNodeInterval);
         
       window.cancelAnimationFrame(drawNodeFrame);
 
+     drawStack(stack);
+  
       x = canvasWidth / 2;
       y = nodeSize + 10;
+     
 
-      drawStack(stack);
-    
-      clearInterval(drawNodeInterval);
     } else {
       drawNodeFrame = window.requestAnimationFrame(drawNode);
-
+     
     }
   }, 2);
-
+  
   //   console.log("NodeY: "+nodeY);
   //   console.log("y: "+y);
   //   console.log("stack value: "+stackNodeValue);
@@ -181,6 +187,47 @@ pushButton.addEventListener("click", (e) => {
   createButton.disabled = false;
   pushButton.disabled = true
   popButton.disabled = false
+  document.getElementById("stackNodeValue").className=""
+  pushButton.className="hide"
+
+
+});
+
+pushButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  let drawNodeFrame = window.requestAnimationFrame(drawNode);
+  let drawNodeInterval = setInterval(() => {
+    if (x != nodeX) x = x - 1;
+    else if (y != nodeY) y = y + 1;
+    if (x == nodeX && y == nodeY) {
+      canvasContext.clearRect(600,0, canvasWidth, canvasHeight)
+
+     drawStack(stack);
+      window.cancelAnimationFrame(drawNodeFrame);
+
+  
+      clearInterval(drawNodeInterval);
+      x = canvasWidth / 2;
+      y = nodeSize + 10;
+     
+
+    } else {
+      drawNodeFrame = window.requestAnimationFrame(drawNode);
+     
+    }
+  }, 2);
+  
+  //   console.log("NodeY: "+nodeY);
+  //   console.log("y: "+y);
+  //   console.log("stack value: "+stackNodeValue);
+  stack.push(stackNodeValue);
+  createButton.disabled = false;
+  pushButton.disabled = true
+  popButton.disabled = false
+  document.getElementById("stackNodeValue").className=""
+  pushButton.className="hide"
+
+  
 });
 
 popButton.addEventListener("click", (e) => {
@@ -208,6 +255,20 @@ loadButton.addEventListener("click", (e) => {
     if(localStorage.getItem("Stack")){
         stack = JSON.parse(localStorage.getItem("Stack"))
         drawStack(stack)
+        saveButton.className="btn"
+        createButton.className="btn"
+        popButton.className="btn"
+        document.getElementById("stackNodeValue").className=""
+  newButton.className="hide"
+        
     }
-
+})
+newButton.addEventListener("click", (e) => {
+  e.preventDefault()
+  newButton.className="hide"
+  loadButton.className="btn"
+  popButton.className="btn"
+  createButton.className="btn"
+  saveButton.className="btn"
+  document.getElementById("stackNodeValue").className=""
 })
