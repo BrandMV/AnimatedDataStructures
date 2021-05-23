@@ -42,7 +42,6 @@ const drawNode = () => {
        // console.log("la x: "+x+" la y: "+y);
     canvasContext.clearRect(0, y-nodeSize+20, canvasWidth, nodeSize*2+6);
       canvasContext.clearRect(x-nodeSize-1, y-nodeSize-6, nodeSize*2+5, nodeSize*2+6);
-      canvasContext.clearArc
     canvasContext.beginPath(); 
     canvasContext.fillStyle = "black";
 
