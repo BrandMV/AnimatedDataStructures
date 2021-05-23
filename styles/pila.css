@@ -1,11 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ 
+}
+body{
+    font-family:'Roboto', sans-serif;
+}
 header{
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 25px 80px;
-    background: linear-gradient(to top, transparent, rgba(0,0,0,0,0.6));
+    padding: 10px 80px;
+    background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.438));
 }
 header .home{
     font-size: 25px;
@@ -16,9 +25,16 @@ header .home{
 }
 header .home a{
     text-decoration: none;
+      transition: ease-out 0.3s;
+    box-shadow: inset 0 0 0 0 white;
+}
+header .home a:hover{
+    color: white;
+    cursor: pointer;
+
 }
 header .menu{
-    float: right;
+    transform: translate(70%,0);
     margin-top: .5rem;
 }
 header ul li{
@@ -26,9 +42,81 @@ header ul li{
 }
 header ul li a{
     text-decoration: none;
-    font-size: 16px;
-    color: #333;
+    font-size: 20px;
+    color: #000b76;
     margin: 0 25px;
     font-weight: 300;
     letter-spacing: 1px;
+    transition: ease-out 0.3s;
+    box-shadow: inset 0 0 0 0 white;
+
+}
+header ul li a:hover{
+  
+    color: white;
+    cursor: pointer;
+
+}
+
+#canvas{
+    
+    margin-top: 4rem;
+
+}
+.container{
+    margin-top: -23rem;
+}
+.wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+.btn{
+    width: 200px;
+    height: 50px;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    transition: ease-out 0.3s;
+    font-size: 1rem;
+    outline: none;
+    box-shadow: inset 0 0 0 0 white;
+    background-color:#5000CA ;
+
+}
+.btn:hover{
+    box-shadow: inset 300px 0 0 0 #000b76;
+    color: white;
+    cursor: pointer;
+}
+.firstButtons{
+    display: flex;
+    justify-content: space-between;
+}
+.secondsButtons{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.thirdsButtons{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+#stackNodeValue{
+    font-size: 1.2rem;
+    width:12rem;
+    border: 1px solid #333;
+}
+.btn:disabled{
+    background-color: #000b76;
+}
+.btn:disabled:hover{
+    box-shadow: none;
+}
+.wave{
+    position:absolute;
+    z-index: -1;
+    bottom: 0;
 }

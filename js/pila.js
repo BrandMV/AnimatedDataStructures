@@ -18,6 +18,8 @@ let aux = y;
 canvasContext.font = "20px Roboto";
 let auxi=0;
 
+canvasContext.fillStyle='white'
+canvasContext.fill()
 
 const drawNode = () => {
     canvasContext.fillText("", nodeX - 18, nodeY + 10);
@@ -53,7 +55,7 @@ const drawNode = () => {
   }
 };
 
-const drawStack = () => {
+const drawStack = (stack) => {
     
   if (stack.length < 2) {
     console.log(stack.length);
@@ -163,7 +165,7 @@ pushButton.addEventListener("click", (e) => {
       x = canvasWidth / 2;
       y = nodeSize + 10;
 
-      drawStack();
+      drawStack(stack);
     
       clearInterval(drawNodeInterval);
     } else {
@@ -183,12 +185,13 @@ pushButton.addEventListener("click", (e) => {
 
 popButton.addEventListener("click", (e) => {
     e.preventDefault()
-    if(stack == 0 )
+    let stackAux = stack
+    if(stackAux == 0 )
         alert("La pila esta vacía. No hay nada que sacar")
     else{
-        stack.pop()
-        localStorage.setItem("Stack", stack)
-        drawStack()
+        stackAux.pop()
+        // localStorage.setItem("Stack", stackAux)
+        drawStack(stackAux)
     }
 
 })
@@ -204,7 +207,7 @@ loadButton.addEventListener("click", (e) => {
     e.preventDefault();
     if(localStorage.getItem("Stack")){
         stack = JSON.parse(localStorage.getItem("Stack"))
-        drawStack()
+        drawStack(stack)
     }
 
 })
