@@ -121,6 +121,7 @@ header ul li a:hover{
 }
 .btn:disabled{
     background-color: #000b76;
+    cursor: default;
 }
 .btn:disabled:hover{
     box-shadow: none;

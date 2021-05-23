@@ -1,4 +1,4 @@
-
+const createNodeButton = document.getElementById("createNodeButton")
 const pushButton = document.getElementById("pushButton");
 const createButton = document.getElementById("createButton");
 const popButton = document.getElementById("popButton");
@@ -114,7 +114,7 @@ const drawStack = (stack) => {
 };
 
 createButton.addEventListener("click", (e) => {
-    if(stack.length > 7){
+    if(stack.length > 8){
         alert("La pila esta llena, no puedes agregar más nodos")
         return
     }
@@ -123,6 +123,7 @@ createButton.addEventListener("click", (e) => {
   stackNodeValue = document.getElementById("stackNodeValue").value; //obtenemos el valor del nodo
   //   console.log(stackNodeValue);
   pushButton.className="btn"
+  createButton.className= "hide"
   document.getElementById("stackNodeValue").className="hide"
 
   console.log(stack.length);
@@ -157,37 +158,6 @@ createButton.addEventListener("click", (e) => {
     pushButton.disabled = false
 
   }
-  let drawNodeInterval = setInterval(() => {
-    if (x != nodeX) x = x - 1;
-    else if (y != nodeY) y = y + 1;
-    if (x == nodeX && y == nodeY) {
-      canvasContext.clearRect(600,0, canvasWidth, canvasHeight)
-
-      clearInterval(drawNodeInterval);
-        
-      window.cancelAnimationFrame(drawNodeFrame);
-
-     drawStack(stack);
-  
-      x = canvasWidth / 2;
-      y = nodeSize + 10;
-     
-
-    } else {
-      drawNodeFrame = window.requestAnimationFrame(drawNode);
-     
-    }
-  }, 2);
-  
-  //   console.log("NodeY: "+nodeY);
-  //   console.log("y: "+y);
-  //   console.log("stack value: "+stackNodeValue);
-  stack.push(stackNodeValue);
-  createButton.disabled = false;
-  pushButton.disabled = true
-  popButton.disabled = false
-  document.getElementById("stackNodeValue").className=""
-  pushButton.className="hide"
 
 
 });
@@ -223,8 +193,9 @@ pushButton.addEventListener("click", (e) => {
   createButton.disabled = false;
   pushButton.disabled = true
   popButton.disabled = false
-  document.getElementById("stackNodeValue").className=""
+  document.getElementById("stackNodeValue").className="hide"
   pushButton.className="hide"
+  createNodeButton.disabled = false
 
   
 });
@@ -232,7 +203,7 @@ pushButton.addEventListener("click", (e) => {
 popButton.addEventListener("click", (e) => {
     e.preventDefault()
     let stackAux = stack
-    if(stackAux == 0 )
+    if(stackAux.length == 0 )
         alert("La pila esta vacía. No hay nada que sacar")
     else{
         stackAux.pop()
@@ -267,7 +238,21 @@ newButton.addEventListener("click", (e) => {
   newButton.className="hide"
   loadButton.className="btn"
   popButton.className="btn"
+  pushButton.className="hide"
   createButton.className="btn"
   saveButton.className="btn"
+  createButton.className="hide"
+  document.getElementById("stackNodeValue").className="hide"
+  createNodeButton.className="btn"
+  popButton.disabled = true
+  loadButton.disabled = true
+
+})
+createNodeButton.addEventListener("click", (e) => {
+  e.preventDefault()
+  createNodeButton.disabled = true
+  createButton.className = "btn"
   document.getElementById("stackNodeValue").className=""
+  canvasContext.clearRect(0, 0, canvasWidth, y+nodeSize*2)
+
 })
