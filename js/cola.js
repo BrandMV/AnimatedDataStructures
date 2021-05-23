@@ -1,4 +1,5 @@
 const enqueueButton = document.getElementById("enqueueButton");
+const createNodeButton = document.getElementById("createNodeButton")
 const createButton = document.getElementById("createButton");
 const dequeueButton = document.getElementById("dequeueButton");
 const canvas = document.getElementById("canvas");
@@ -84,10 +85,7 @@ const drawStack = (queue) => {
 };
 
 createButton.addEventListener("click", (e) => {
-  if (queue.length > 7) {
-    alert("La pila esta llena, no puedes agregar más nodos");
-    return;
-  }
+ 
   e.preventDefault();
 
   queueNodeValue = document.getElementById("queueNodeValue").value; //obtenemos el valor del nodo
@@ -128,7 +126,7 @@ createButton.addEventListener("click", (e) => {
     dequeueButton.disabled = true;
     createButton.disabled = true;
     enqueueButton.disabled = false;
-    console.log(queue.length);
+    createButton.className = "hide"
   }
 });
 
@@ -157,16 +155,19 @@ enqueueButton.addEventListener("click", (e) => {
   createButton.disabled = false;
   enqueueButton.disabled = true;
   dequeueButton.disabled = false;
-  document.getElementById("queueNodeValue").className = "";
+  document.getElementById("queueNodeValue").className = "hide";
   enqueueButton.className = "hide";
+  createNodeButton.disabled = false
+
+
 });
 
 dequeueButton.addEventListener("click", (e) => {
   e.preventDefault();
   let queueAux = queue;
-  if (queueAux == 0) alert("La pila esta vacía. No hay nada que sacar");
+  if (queueAux.length == 0) alert("La cola esta vacía. No hay nada que sacar");
   else {
-    queueAux.pop();
+    queueAux.shift();
     // localStorage.setItem("Stack", stackAux)
     drawStack(queueAux);
   }
@@ -183,10 +184,12 @@ loadButton.addEventListener("click", (e) => {
     queue = JSON.parse(localStorage.getItem("Queue"));
     drawStack(queue);
     saveButton.className = "btn";
-    createButton.className = "btn";
+    createButton.className = "hide";
     dequeueButton.className = "btn";
-    document.getElementById("queueNodeValue").className = "";
+    createNodeButton.className = "btn"
+    document.getElementById("queueNodeValue").className = "hide";
     newButton.className = "hide";
+    dequeueButton.disabled = false
   }
 });
 newButton.addEventListener("click", (e) => {
@@ -194,7 +197,24 @@ newButton.addEventListener("click", (e) => {
   newButton.className = "hide";
   loadButton.className = "btn";
   dequeueButton.className = "btn";
-  createButton.className = "btn";
+  createButton.className = "hide";
   saveButton.className = "btn";
-  document.getElementById("queueNodeValue").className = "";
+  dequeueButton.disabled = true
+  createNodeButton.className = "btn"
+  document.getElementById("queueNodeValue").className = "hide";
 });
+createNodeButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    canvasContext.clearRect(canvasWidth-nodeSize*3, 0, canvasWidth, nodeSize*3)
+    if (queue.length > 7) {
+        alert("La pila esta llena, no puedes agregar más nodos");
+        return;
+      }
+  document.getElementById("queueNodeValue").className = "";
+  enqueueButton.className = "btn"
+  createNodeButton.disabled = true
+  createButton.className = "btn"
+  enqueueButton.className = "hide"
+  dequeueButton.disable = true
+    
+})

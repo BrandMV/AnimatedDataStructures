@@ -114,10 +114,7 @@ const drawStack = (stack) => {
 };
 
 createButton.addEventListener("click", (e) => {
-    if(stack.length > 8){
-        alert("La pila esta llena, no puedes agregar más nodos")
-        return
-    }
+   
   e.preventDefault();
 
   stackNodeValue = document.getElementById("stackNodeValue").value; //obtenemos el valor del nodo
@@ -226,9 +223,9 @@ loadButton.addEventListener("click", (e) => {
         stack = JSON.parse(localStorage.getItem("Stack"))
         drawStack(stack)
         saveButton.className="btn"
-        createButton.className="btn"
+        createNodeButton.className = "btn"
         popButton.className="btn"
-        document.getElementById("stackNodeValue").className=""
+        document.getElementById("stackNodeValue").className="hide"
   newButton.className="hide"
         
     }
@@ -245,11 +242,15 @@ newButton.addEventListener("click", (e) => {
   document.getElementById("stackNodeValue").className="hide"
   createNodeButton.className="btn"
   popButton.disabled = true
-  loadButton.disabled = true
+  loadButton.disabled = false
 
 })
 createNodeButton.addEventListener("click", (e) => {
   e.preventDefault()
+  if(stack.length > 7){
+    alert("La pila esta llena, no puedes agregar más nodos")
+    return
+}
   createNodeButton.disabled = true
   createButton.className = "btn"
   document.getElementById("stackNodeValue").className=""

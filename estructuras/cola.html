@@ -34,7 +34,7 @@
               type="button"
               value="Guardar cola"
               id="saveButton"
-              class="btn"
+              class="hide"
             />
             <input
               type="button"
@@ -51,13 +51,14 @@
           </div>
   
           <div class="secondsButtons">
-            <input type="button" value="Dequeue" id="dequeueButton" class="btn" />
             <input
-              type="button"
-              value="Crear Nodo"
-              id="createButton"
-              class="btn"
-            />
+            type="button"
+            value="Crear Nodo"
+            id="createNodeButton"
+            class="hide"
+          />
+            <input type="button" value="Dequeue" id="dequeueButton" class="hide" />
+         
           </div>
   
           <div class="thirdsButtons">
@@ -67,14 +68,20 @@
               id="queueNodeValue"
               placeholder="inserta un numero"
               required
-              class=""
+              class="hide"
             />
+            <input
+            type="button"
+            value="Crear"
+            id="createButton"
+            class="hide"
+          />
             <div class="push">
               <input
                 type="button"
                 value="Enqueue"
                 id="enqueueButton"
-                class="btn"
+                class="hide"
               />
             </div>
           </div>
