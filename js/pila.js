@@ -181,6 +181,20 @@ pushButton.addEventListener("click", (e) => {
   popButton.disabled = false
 });
 
+popButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    if(stack == 0 )
+        alert("La pila esta vacía. No hay nada que sacar")
+    else{
+        stack.pop()
+        localStorage.setItem("Stack", stack)
+        drawStack()
+    }
+
+})
+
+
+
 saveButton.addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.setItem("Stack", JSON.stringify(stack))
