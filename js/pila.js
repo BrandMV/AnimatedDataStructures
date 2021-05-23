@@ -3,6 +3,8 @@ const createButton = document.getElementById("createButton");
 const popButton = document.getElementById("popButton");
 const canvas = document.getElementById("canvas");
 const canvasContext = canvas.getContext("2d");
+const saveButton = document.getElementById("saveButton")
+const loadButton = document.getElementById("loadButton")
 let stack = [];
 let stackNodeValue = 0;
 const nodeSize = 25;
@@ -106,6 +108,10 @@ const drawStack = () => {
 };
 
 createButton.addEventListener("click", (e) => {
+    if(stack.length > 9){
+        alert("La pila esta llena, no puedes agregar más nodos")
+        return
+    }
   e.preventDefault();
   stackNodeValue = document.getElementById("stackNodeValue").value; //obtenemos el valor del nodo
   //   console.log(stackNodeValue);
@@ -174,3 +180,17 @@ pushButton.addEventListener("click", (e) => {
   pushButton.disabled = true
   popButton.disabled = false
 });
+
+saveButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.setItem("Stack", JSON.stringify(stack))
+})
+
+loadButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    if(localStorage.getItem("Stack")){
+        stack = JSON.parse(localStorage.getItem("Stack"))
+        drawStack()
+    }
+
+})
