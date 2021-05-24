@@ -126,43 +126,53 @@
               <pre>
                 typedef struct nodo{
                   int dato;
-                  struct nodo* next;
-                }Nodo
-                Nodo *front = NULL;
-                Nodo *rear = NULL;
-              </pre>
-            </div>
-            <div class="code hide" id="cCodeEnqueueNode">
-              <h4>Còdigo</h4>
-              <pre>
-                void enqueue(int x){
-                  Nodo *temp=(Nodo *)malloc(sizeof(Nodo));
-                  temp->dato = x;
-                  temp->next = NULL;
-                  if(front == NULL && rear == NULL){
-                    front=rear=temp;
-                    return;
+                  struct nodo *next;
+                }Nodo;
+                Nodo* crearNodo(int dato);
+
+                Nodo *crearNodo(int dato){
+                  Nodo *nuevo = NULL;
+                  nuevo = (Nodo*)malloc(sizeof(Nodo));
+                  if( nuevo != NULL ){
+                    nuevo-> dato = dato;
+                    nuevo-> next = NULL;
                   }
-                  rear->next = temp;
-                  rear=temp;
+                  return nuevo;
                 }
               </pre>
             </div>
-            <div class="code hide" id="cCodeDequeueNode">
+            <div class="code hide" id="cCodefirstNode">
               <h4>Còdigo</h4>
               <pre>
-                void dequeue(){
-                  Nodo *temp = front;
-                  if(front == NULL)´
-                  printf("La cola esta vacia\n");
-                  return;
+                int insertarInicio(Nodo **cabeza, int dato){
+                  Nodo *nuevo == NULL;
+                  nuevo = crearNodo(dato);
+                  if( nuevo != NULL ){
+                    nuevo->mext = *cabeza;
+                    *cabeza = nuevo;
+                    return 1;
+                  }
+                  return 0;
                 }
-                if(front == rear)
-                  front=rear=NULL;
-                else
-                  front=front->next;
-                printf("Eliminaste %d", temp->dato);
-                free(temp);
+              </pre>
+            </div>
+            <div class="code hide" id="cCodeLastNode">
+              <h4>Còdigo</h4>
+              <pre>
+                int insertarFinal(Nodo **cabeza, int dato){
+                  Nodo *nuevo = NULL;
+                  *nAux = *cabeza;
+                  nuevo = crearNodo(dato);
+                  if( nuevo != NULL ){
+                    while(nAux->next != NULL){
+                      nAux = nAux->next;
+                    }
+                    nAux->next = nuevo;
+                    return 1;
+                  }
+                  return 0;
+
+                }
               </pre>
             </div>
           </article>

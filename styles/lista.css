@@ -148,3 +148,12 @@ header ul li a:hover{
     transform: translate(0,-50%);
     transition: ease-in-out 0.3s;
 }
+.code{
+    position: fixed;
+
+    left: 20%;
+    top: 75%;
+    margin-left: 2rem;
+    transform: translate(0,-50%);
+    transition: ease-in-out 0.3s;
+}
