@@ -8,6 +8,9 @@ const saveButton = document.getElementById("saveButton")
 const loadButton = document.getElementById("loadButton")
 const cCode = document.getElementById("cCode")
 const newButton = document.getElementById("newButton")
+const cCodeCreateNode = document.getElementById("cCodeCreateNode")
+const cCodePopNode = document.getElementById("cCodePopNode")
+const cCodeInsertNode = document.getElementById("cCodeInsertNode")
 let stack = [];
 let stackNodeValue = 0;
 const nodeSize = 25;
@@ -122,6 +125,9 @@ createButton.addEventListener("click", (e) => {
   pushButton.className="btn"
   createButton.className= "hide"
   document.getElementById("stackNodeValue").className="hide"
+  cCodeCreateNode.className="code"
+  cCodeInsertNode.className="hide"
+  cCodePopNode.className="hide"
 
   console.log(stack.length);
   if (stack.length < 1) {
@@ -161,6 +167,9 @@ createButton.addEventListener("click", (e) => {
 
 pushButton.addEventListener("click", (e) => {
   e.preventDefault();
+  cCodePopNode.className="hide"
+  cCodeInsertNode.className = "code"
+  cCodeCreateNode.className = "hide"
   let drawNodeFrame = window.requestAnimationFrame(drawNode);
   let drawNodeInterval = setInterval(() => {
     if (x != nodeX) x = x - 1;
@@ -198,6 +207,9 @@ pushButton.addEventListener("click", (e) => {
 });
 
 popButton.addEventListener("click", (e) => {
+  cCodeCreateNode.className = "hide"
+  cCodeInsertNode.className = "hide"
+  cCodePopNode.className = "code"
     e.preventDefault()
     let stackAux = stack
     if(stackAux.length == 0 )

@@ -32,19 +32,19 @@
           <div class="firstsButtons">
             <input
               type="button"
-              value="Guardar cola"
+              value="Guardar lista"
               id="saveButton"
               class="hide"
             />
             <input
               type="button"
-              value="Cargar cola"
+              value="Cargar lista"
               id="loadButton"
               class="btn"
             />
             <input
             type="button"
-            value="Nueva cola"
+            value="Nueva lista"
             id="newButton"
             class="btn"
           />
@@ -55,9 +55,9 @@
             type="button"
             value="Crear Nodo"
             id="createNodeButton"
-            class="hide"
+            class="btn"
           />
-            <input type="button" value="Dequeue" id="dequeueButton" class="hide" />
+            <input type="button" value="Eliminar Nodo" id="dropButton" class="btn" />
          
           </div>
   
@@ -65,27 +65,60 @@
             <input
               type="number"
               step="0.1"
-              id="queueNodeValue"
+              id="listNodeValue"
               placeholder="inserta un numero"
               required
-              class="hide"
+              class=""
             />
             <input
             type="button"
             value="Crear"
             id="createButton"
-            class="hide"
+            class="btn"
           />
-            <div class="push">
+            
+        </div>
+        <div class="fourthsButton">
               <input
                 type="button"
-                value="Enqueue"
-                id="enqueueButton"
-                class="hide"
+                value="Insertar al inicio"
+                id="firstButton"
+                class="btn"
               />
-            </div>
-          </div>
-  
+              <input
+              type="button"
+              value="Insertar al final"
+              id="lastButton"
+              class="btn"
+            />
+         
+        </div>
+        <div style="margin-top: 1rem;">
+          <input
+          type="button"
+          value="Posicion especifica"
+          id="specificButton"
+          class="btn"
+        />
+        <input
+        type="number"
+        step="1"
+        id="saltButton"
+        placeholder="inserta posición"
+        required
+        class=""
+        style="height: 3rem; font-size: 1rem;"
+      />
+   
+        </div>
+        <input
+        type="button"
+        value="Insertar"
+        id="insertSpecificButton"
+        class="btn"
+        style="width: 100%"
+      />
+        
           <br />
           <article>
             <div class="code hide" id="cCode">

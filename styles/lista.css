@@ -134,3 +134,17 @@ header ul li a:hover{
 .thirdsButtons input{
     width: 100%;
 }
+.fourthsButton{
+    margin-top: 1rem;
+
+    display: flex;
+    gap: 1rem;
+}
+.code{
+    position: fixed;
+    left: -10px;
+    top: 30%;
+    margin-left: 2rem;
+    transform: translate(0,-50%);
+    transition: ease-in-out 0.3s;
+}

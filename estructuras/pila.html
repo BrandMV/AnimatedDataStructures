@@ -28,7 +28,7 @@
           id="canvas"
           width="650"
           height="700"
-          style="border: 1px solid black"
+     
         ></canvas>
       </div>
 
@@ -88,9 +88,44 @@
 
         <br />
         <article>
-          <div class="code hide" id="cCode">
+          <div class="hide" id="cCodeCreateNode">
             <h4>Còdigo</h4>
-            some code
+            <pre>
+              struct nodo{
+                int dato;
+                struct nodo *next;
+              }
+              struct nodo *pila = NULL;
+              void crearNodo(int nDato, struct nodo *aux){
+                aux = (struct node *) malloc(sizeof(struct nodo));
+                aux->dato = nDato;
+                aux->next = NULL;
+              }
+            </pre>
+          </div>
+          <div class="hide" id="cCodeInsertNode">
+            <h4>Còdigo</h4>
+            <pre>
+              void push(strut nodo *aux, struct nodo *pila){
+                aux->next = pila;
+                pila = aux;
+              }
+            </pre>
+          </div>
+          <div class="hide" id="cCodePopNode">
+            <h4>Còdigo</h4>
+            <pre>
+              void pop(struct *nodo pila){
+                struct nodo *aux;
+                if( pila == NULL )
+                  printf("La pila esta vacia\n");
+                else{
+                  aux = pila;
+                  pila = pila->next;
+                  free(aux)
+                }
+              }
+            </pre>
           </div>
         </article>
       </article>
