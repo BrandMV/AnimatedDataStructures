@@ -1,4 +1,6 @@
+const insert = document.getElementById("insert");
 const lastButton = document.getElementById("lastButton");
+const firstButton = document.getElementById("firstButton");
 const createNodeButton = document.getElementById("createNodeButton")
 const createButton = document.getElementById("createButton");
 const dropButton = document.getElementById("dropButton");
@@ -15,13 +17,19 @@ const nodewidth=65
 const nodeHeight=25
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
-let x = canvasWidth - nodewidth-10;
+let x = canvasWidth - nodewidth*2;
 let y = nodeHeight + 10;
 let nodeX = 25;
 let nodeY = canvasHeight / 2;
-let aux = y;
+let auxY = y;
+let auxX = x;
+let auxNX = nodeX
+let auxNY = nodeY
 canvasContext.font = "20px Roboto";
 let auxi = 0;
+let init = 0;
+let end = 0;
+let specific = 0;
 
 canvasContext.fillStyle = "white";
 canvasContext.fill();
@@ -30,71 +38,11 @@ const drawNode = () => {
   // canvasContext.fillText("", nodeX - 18, nodeY + 10);
 
   // console.log("la x: "+x+" la y: "+y);
-  canvasContext.clearRect(
-    list.length * nodeSize*3  + 25,
-    0,
-    canvasWidth,
-    canvasHeight
-  );
-  canvasContext.clearRect(x-nodeSize-2, y-nodeSize-6, nodeSize*3+10, nodeSize*2+8);
-
-  canvasContext.beginPath(); // crearemos un nodo
-  canvasContext.fillStyle = "black";
-  canvasContext.fillText(listNodeValue, x - 15, y + 8);
-  canvasContext.arc(x, y, nodeSize, 0, Math.PI * 2, false);
-  canvasContext.stroke();
-  canvasContext.closePath();
-
-  canvasContext.beginPath(); // crearemos un nodo
-
-  canvasContext.moveTo(x + 25, y);
-  canvasContext.lineTo(x + 50, y);
-  canvasContext.lineTo(x + 40, y - 10);
-  canvasContext.moveTo(x + 50, y);
-  canvasContext.lineTo(x + 40, y + 10);
-  canvasContext.stroke();
-  canvasContext.closePath();
-};
-
-const drawStack = (list) => {
   console.log(list.length);
-  canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
-  nodeY = canvasHeight / 2;
-  nodeX = 25;
 
-  for (let listNode of list) {
-    canvasContext.beginPath(); // crearemos un nodo
-    canvasContext.fillStyle = "black";
-    canvasContext.fillText(listNode, nodeX - 15, nodeY + 8);
-    canvasContext.arc(nodeX, nodeY, nodeSize, 0, Math.PI * 2, false);
-    canvasContext.stroke();
-    canvasContext.closePath();
-
-    canvasContext.beginPath(); // crearemos un nodo
-    canvasContext.strokeStyle = "black";
-
-    canvasContext.moveTo(nodeX + 25, nodeY);
-    canvasContext.lineTo(nodeX + 50, nodeY);
-    canvasContext.lineTo(nodeX + 40, nodeY - 10);
-    canvasContext.moveTo(nodeX + 50, nodeY);
-    canvasContext.lineTo(nodeX + 40, nodeY + 10);
-    canvasContext.stroke();
-    canvasContext.closePath();
-    nodeX = nodeX + nodeSize * 2 + 25;
-
-    console.log("Nodey Despues " + nodeY);
-  }
-};
-
-createButton.addEventListener("click", (e) => {
- 
-  e.preventDefault();
-
-  listNodeValue = document.getElementById("listNodeValue").value; //obtenemos el valor del nodo
-  //   console.log(stackNodeValue);
-  lastButton.className = "btn";
-  document.getElementById("listNodeValue").className = "hide";
-
+  if(list.length<1){
+    canvasContext.clearRect(list.length * nodewidth*5  + 25,0,canvasWidth,canvasHeight);
+    canvasContext.clearRect(x-1, y-nodeHeight, nodewidth*3, nodeHeight*2);
     canvasContext.beginPath(); // crearemos un nodo
     canvasContext.fillStyle = "black";
     canvasContext.fillText(listNodeValue, x+4 , y+20);
@@ -103,9 +51,159 @@ createButton.addEventListener("click", (e) => {
     canvasContext.moveTo(x+nodewidth-15,y)
     canvasContext.lineTo(x+nodewidth-15,y+nodeHeight)
     canvasContext.stroke();
-
+    canvasContext.moveTo(x+nodewidth,y+nodeHeight/2)
+    canvasContext.lineTo(x+nodewidth+30, y+nodeHeight/2)
+    canvasContext.stroke();
+    canvasContext.moveTo(x+nodewidth+30,y+nodeHeight/2)
+    canvasContext.lineTo(x+nodewidth+30, y+nodeHeight/2 + 20)
+    canvasContext.stroke();
+    canvasContext.moveTo(x+nodewidth+21, y+nodeHeight/2 + 20)
+    canvasContext.lineTo(x+nodewidth+39, y+nodeHeight/2 + 20)
+    canvasContext.stroke();
+    canvasContext.moveTo(x+nodewidth+24, y+nodeHeight/2 + 22)
+    canvasContext.lineTo(x+nodewidth+36, y+nodeHeight/2 + 22)
+    canvasContext.stroke();
+    canvasContext.moveTo(x+nodewidth+27, y+nodeHeight/2 + 24)
+    canvasContext.lineTo(x+nodewidth+33, y+nodeHeight/2 + 24)
+    canvasContext.stroke();
     canvasContext.closePath();
-    document.getElementById("listNodeValue").value = "";
+  }else if(list.length > 0){
+    canvasContext.clearRect(list.length * nodewidth*5 + 25,0,canvasWidth,canvasHeight);
+    canvasContext.clearRect(x-1, y-nodeHeight+1, nodewidth*3, nodeHeight*2);
+    canvasContext.beginPath(); // crearemos un nodo
+    canvasContext.fillStyle = "black";
+    canvasContext.fillText(listNodeValue, x+4 , y+20);
+    canvasContext.rect(x, y, nodewidth, nodeHeight);
+    canvasContext.stroke();
+    canvasContext.moveTo(x+nodewidth-15,y)
+    canvasContext.lineTo(x+nodewidth-15,y+nodeHeight)
+    canvasContext.stroke();
+    canvasContext.moveTo(x+nodewidth,y+nodeHeight/2)
+    canvasContext.lineTo(x+nodewidth+30, y+nodeHeight/2)
+    canvasContext.stroke();
+    canvasContext.moveTo(x+nodewidth+30,y+nodeHeight/2)
+    canvasContext.lineTo(x+nodewidth+20, y+nodeHeight/2-10)
+    canvasContext.stroke();
+    canvasContext.moveTo(x+nodewidth+30,y+nodeHeight/2)
+    canvasContext.lineTo(x+nodewidth+20, y+nodeHeight/2+10)
+    canvasContext.stroke();
+    canvasContext.closePath();
+  }
+
+};
+
+const drawStack = (list) => {
+  console.log(list.length);
+  canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
+  nodeY = auxNY;
+  nodeX = auxNX;
+  for (let listNode of list) {
+    canvasContext.beginPath(); // crearemos un nodo
+    canvasContext.fillStyle = "black";
+    canvasContext.fillText(listNode, nodeX+4 , nodeY+20);
+    canvasContext.rect(nodeX, nodeY, nodewidth, nodeHeight);
+    canvasContext.stroke();
+    canvasContext.moveTo(nodeX+nodewidth-15,nodeY)
+    canvasContext.lineTo(nodeX+nodewidth-15,nodeY+nodeHeight)
+    canvasContext.stroke();
+    if(listNode != list[list.length -1 ]){
+        canvasContext.moveTo(nodeX+nodewidth+30,nodeY+nodeHeight/2)
+        canvasContext.lineTo(nodeX+nodewidth+20, nodeY+nodeHeight/2-10)
+        canvasContext.moveTo(nodeX+nodewidth+30,nodeY+nodeHeight/2)
+        canvasContext.lineTo(nodeX+nodewidth+20, nodeY+nodeHeight/2+10)
+      
+    }
+    canvasContext.stroke();
+    canvasContext.closePath();
+  nodeX = nodeX + nodewidth+30
+}
+
+ if(list.length > 0){
+        canvasContext.moveTo(nodeX+nodewidth,nodeY+nodeHeight/2)
+        canvasContext.lineTo(nodeX+nodewidth+30, nodeY+nodeHeight/2)
+        canvasContext.stroke(); 
+       canvasContext.moveTo(nodeX+nodewidth,nodeY+nodeHeight/2)
+            canvasContext.lineTo(nodeX+nodewidth+30, nodeY+nodeHeight/2)
+            canvasContext.stroke();
+            canvasContext.moveTo(nodeX+nodewidth+30,nodeY+nodeHeight/2)
+            canvasContext.lineTo(nodeX+nodewidth+30, nodeY+nodeHeight/2 + 20)
+            canvasContext.stroke();
+            canvasContext.moveTo(nodeX+nodewidth+21, nodeY+nodeHeight/2 + 20)
+            canvasContext.lineTo(nodeX+nodewidth+39, nodeY+nodeHeight/2 + 20)
+            canvasContext.stroke();
+            canvasContext.moveTo(nodeX+nodewidth+24, nodeY+nodeHeight/2 + 22)
+            canvasContext.lineTo(nodeX+nodewidth+36, nodeY+nodeHeight/2 + 22)
+            canvasContext.stroke();
+            canvasContext.moveTo(nodeX+nodewidth+27, nodeY+nodeHeight/2 + 24)
+            canvasContext.lineTo(nodeX+nodewidth+33, nodeY+nodeHeight/2 + 24)
+            canvasContext.stroke();
+            canvasContext.closePath();
+  
+
+    console.log("Nodey Despues " + nodeY);
+  }
+
+};
+
+createButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  listNodeValue = document.getElementById("listNodeValue").value; //obtenemos el valor del nodo
+  //   console.log(stackNodeValue);
+  lastButton.className = "btn";
+  document.getElementById("listNodeValue").className = "hide";
+    console.log(list.length);
+    if(list.length < 1 && init == 1){
+        canvasContext.beginPath(); // crearemos un nodo
+        canvasContext.fillStyle = "black";
+        canvasContext.fillText(listNodeValue, x+4 , y+20);
+        canvasContext.rect(x, y, nodewidth, nodeHeight);
+        canvasContext.stroke();
+        canvasContext.moveTo(x+nodewidth-15,y)
+        canvasContext.lineTo(x+nodewidth-15,y+nodeHeight)
+        canvasContext.stroke();
+        canvasContext.moveTo(x+nodewidth,y+nodeHeight/2)
+        canvasContext.lineTo(x+nodewidth+30, y+nodeHeight/2)
+        canvasContext.stroke();
+        canvasContext.moveTo(x+nodewidth+30,y+nodeHeight/2)
+        canvasContext.lineTo(x+nodewidth+30, y+nodeHeight/2 + 20)
+        canvasContext.stroke();
+        canvasContext.moveTo(x+nodewidth+21, y+nodeHeight/2 + 20)
+        canvasContext.lineTo(x+nodewidth+39, y+nodeHeight/2 + 20)
+        canvasContext.stroke();
+        canvasContext.moveTo(x+nodewidth+24, y+nodeHeight/2 + 22)
+        canvasContext.lineTo(x+nodewidth+36, y+nodeHeight/2 + 22)
+        canvasContext.stroke();
+        canvasContext.moveTo(x+nodewidth+27, y+nodeHeight/2 + 24)
+        canvasContext.lineTo(x+nodewidth+33, y+nodeHeight/2 + 24)
+        canvasContext.stroke();
+        canvasContext.closePath();
+        console.log("prueba");
+    }else{
+        canvasContext.beginPath(); // crearemos un nodo
+        canvasContext.fillStyle = "black";
+        canvasContext.fillText(listNodeValue, x+4 , y+20);
+        canvasContext.rect(x, y, nodewidth, nodeHeight);
+        canvasContext.stroke();
+        canvasContext.moveTo(x+nodewidth-15,y)
+        canvasContext.lineTo(x+nodewidth-15,y+nodeHeight)
+        canvasContext.stroke();
+        canvasContext.moveTo(x+nodewidth,y+nodeHeight/2)
+        canvasContext.lineTo(x+nodewidth+30, y+nodeHeight/2)
+        canvasContext.stroke();
+        canvasContext.moveTo(x+nodewidth+30,y+nodeHeight/2)
+        canvasContext.lineTo(x+nodewidth+20, y+nodeHeight/2-10)
+        canvasContext.stroke();
+        canvasContext.moveTo(x+nodewidth+30,y+nodeHeight/2)
+        canvasContext.lineTo(x+nodewidth+20, y+nodeHeight/2+10)
+        canvasContext.stroke();
+        canvasContext.closePath();
+        document.getElementById("listNodeValue").value = "";
+    }
+
+  list.push(listNodeValue);
+
+
+   
     //   createButton.disabled = false
     dropButton.disabled = true;
     createButton.disabled = true;
@@ -114,9 +212,10 @@ createButton.addEventListener("click", (e) => {
   
 });
 
-lastButton.addEventListener("click", (e) => {
+insert.addEventListener("click", (e) => {
   e.preventDefault();
-  //   let drawNodeFrame = window.requestAnimationFrame(drawNode);
+    let drawNodeFrame = window.requestAnimationFrame(drawNode);
+    nodeX = auxNX
   let drawNodeInterval = setInterval(() => {
     if (x != nodeX) x = x - 1;
     else if (y != nodeY) y = y + 1;
@@ -125,8 +224,8 @@ lastButton.addEventListener("click", (e) => {
       window.cancelAnimationFrame(drawNodeFrame);
       drawStack(list);
       clearInterval(drawNodeInterval);
-      x = canvasWidth - nodeSize * 2;
-      y = nodeSize + 10;
+      x = auxX;
+      y = auxY;
     } else {
       drawNodeFrame = window.requestAnimationFrame(drawNode);
     }
@@ -135,7 +234,7 @@ lastButton.addEventListener("click", (e) => {
   //   console.log("NodeY: "+nodeY);
   //   console.log("y: "+y);
   //   console.log("stack value: "+stackNodeValue);
-  list.push(listNodeValue);
+//   list.push(listNodeValue);
   createButton.disabled = false;
   lastButton.disabled = true;
   dropButton.disabled = false;
@@ -190,7 +289,7 @@ newButton.addEventListener("click", (e) => {
 createNodeButton.addEventListener("click", (e) => {
     e.preventDefault()
     canvasContext.clearRect(canvasWidth-nodeSize*3, 0, canvasWidth, nodeSize*3)
-    if (list.length > 7) {
+    if (list.length > 5) {
         alert("La pila esta llena, no puedes agregar más nodos");
         return;
       }
@@ -201,4 +300,9 @@ createNodeButton.addEventListener("click", (e) => {
   lastButton.className = "hide"
   dropButton.disable = true
     
+})
+
+firstButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    init = 1;
 })
