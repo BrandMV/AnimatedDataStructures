@@ -138,8 +138,9 @@ header ul li a:hover{
 }
 .code{
     position: fixed;
-    left: -10px;
-    top: 30%;
+
+    left: 20%;
+    top: 75%;
     margin-left: 2rem;
     transform: translate(0,-50%);
     transition: ease-in-out 0.3s;

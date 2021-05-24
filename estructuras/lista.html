@@ -121,9 +121,49 @@
         
           <br />
           <article>
-            <div class="code hide" id="cCode">
+            <div class="code hide" id="cCodeCreateNode">
               <h4>Còdigo</h4>
-              some code
+              <pre>
+                typedef struct nodo{
+                  int dato;
+                  struct nodo* next;
+                }Nodo
+                Nodo *front = NULL;
+                Nodo *rear = NULL;
+              </pre>
+            </div>
+            <div class="code hide" id="cCodeEnqueueNode">
+              <h4>Còdigo</h4>
+              <pre>
+                void enqueue(int x){
+                  Nodo *temp=(Nodo *)malloc(sizeof(Nodo));
+                  temp->dato = x;
+                  temp->next = NULL;
+                  if(front == NULL && rear == NULL){
+                    front=rear=temp;
+                    return;
+                  }
+                  rear->next = temp;
+                  rear=temp;
+                }
+              </pre>
+            </div>
+            <div class="code hide" id="cCodeDequeueNode">
+              <h4>Còdigo</h4>
+              <pre>
+                void dequeue(){
+                  Nodo *temp = front;
+                  if(front == NULL)´
+                  printf("La cola esta vacia\n");
+                  return;
+                }
+                if(front == rear)
+                  front=rear=NULL;
+                else
+                  front=front->next;
+                printf("Eliminaste %d", temp->dato);
+                free(temp);
+              </pre>
             </div>
           </article>
         </article>

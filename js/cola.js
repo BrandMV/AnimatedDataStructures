@@ -8,6 +8,9 @@ const saveButton = document.getElementById("saveButton");
 const loadButton = document.getElementById("loadButton");
 const cCode = document.getElementById("cCode");
 const newButton = document.getElementById("newButton");
+const cCodeEnqueueNode = document.getElementById("cCodeEnqueueNode")
+const cCodeDequeueNode = document.getElementById("cCodeDequeueNode")
+const cCodeCreateNode = document.getElementById("cCodeCreateNode")
 let queue = [];
 let queueNodeValue = 0;
 const nodeSize = 25;
@@ -87,7 +90,9 @@ const drawStack = (queue) => {
 createButton.addEventListener("click", (e) => {
  
   e.preventDefault();
-
+  cCodeCreateNode.className = "code"
+  cCodeDequeueNode.className = "hide"
+  cCodeEnqueueNode.className = "hide"
   queueNodeValue = document.getElementById("queueNodeValue").value; //obtenemos el valor del nodo
   //   console.log(stackNodeValue);
   enqueueButton.className = "btn";
@@ -132,6 +137,9 @@ createButton.addEventListener("click", (e) => {
 
 enqueueButton.addEventListener("click", (e) => {
   e.preventDefault();
+  cCodeCreateNode.className = "hide"
+  cCodeDequeueNode.className = "hide"
+  cCodeEnqueueNode.className = "code"
   //   let drawNodeFrame = window.requestAnimationFrame(drawNode);
   let drawNodeInterval = setInterval(() => {
     if (x != nodeX) x = x - 1;
@@ -164,6 +172,9 @@ enqueueButton.addEventListener("click", (e) => {
 
 dequeueButton.addEventListener("click", (e) => {
   e.preventDefault();
+  cCodeCreateNode.className = "hide"
+  cCodeDequeueNode.className = "code"
+  cCodeEnqueueNode.className = "hide"
   let queueAux = queue;
   if (queueAux.length == 0) alert("La cola esta vacía. No hay nada que sacar");
   else {
