@@ -4,6 +4,8 @@ const firstButton = document.getElementById("firstButton");
 const createNodeButton = document.getElementById("createNodeButton");
 const createButton = document.getElementById("createButton");
 const dropButton = document.getElementById("dropButton");
+const dropLastButton = document.getElementById("dropLastButton")
+const dropSpecificButton = document.getElementById("dropSpecificButton")
 const canvas = document.getElementById("canvas");
 const canvasContext = canvas.getContext("2d");
 const saveButton = document.getElementById("saveButton");
@@ -11,6 +13,9 @@ const loadButton = document.getElementById("loadButton");
 const cCode = document.getElementById("cCode");
 const newButton = document.getElementById("newButton");
 const insertSpecificButton = document.getElementById("insertSpecificButton");
+const saltButton = document.getElementById("saltButton")
+const dropSpecific = document.getElementById("dropSpecific")
+const dropValue = document.getElementById("dropValue")
 let list = [];
 let listNodeValue = 0;
 const nodeSize = 25;
@@ -101,6 +106,7 @@ const drawNode = () => {
 
 const drawStack = (list) => {
   console.log(list.length);
+  canvasContext.clearRect(canvasWidth-nodewidth*5,0,canvasWidth,nodeHeight * 3);
   canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
   nodeY = auxNY;
   nodeX = auxNX;
@@ -214,10 +220,11 @@ createButton.addEventListener("click", (e) => {
   }
 
   //   createButton.disabled = false
-  dropButton.disabled = true;
-  createButton.disabled = true;
-  lastButton.disabled = false;
-  createButton.className = "hide";
+  firstButton.className = "btn"
+  lastButton.className = "btn"
+  specificButton.className = "btn"
+  createButton.className = "hide"
+
 });
 
 const insertNode = (position) => {
@@ -244,28 +251,14 @@ const insertNode = (position) => {
       }, 0.1);
     
       list.splice(position, 0, listNodeValue)
-      localStorage.setItem("List", JSON.stringify(list));
-
       createButton.disabled = false;
-      lastButton.disabled = true;
       dropButton.disabled = false;
       document.getElementById("listNodeValue").className = "hide";
-      lastButton.className = "hide";
       createNodeButton.disabled = false;
     }
   
 };
 
-dropButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  let listAux = list;
-  if (listAux.length == 0) alert("La cola esta vacía. No hay nada que sacar");
-  else {
-    listAux.shift();
-    // localStorage.setItem("Stack", stackAux)
-    drawStack(listAux);
-  }
-});
 
 saveButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -284,38 +277,41 @@ loadButton.addEventListener("click", (e) => {
     document.getElementById("listNodeValue").className = "hide";
     newButton.className = "hide";
     dropButton.disabled = false;
+    dropLastButton.className = "btn"
+    dropSpecificButton.className = "btn"
+    // firstButton.className = "btn"
+    // lastButton.className = "btn"
+    // specificButton.className = "btn"
   }
 });
 newButton.addEventListener("click", (e) => {
   e.preventDefault();
-  newButton.className = "hide";
-  loadButton.className = "btn";
-  dropButton.className = "btn";
-  createButton.className = "hide";
-  saveButton.className = "btn";
-  dropButton.disabled = true;
-  createNodeButton.className = "btn";
   document.getElementById("listNodeValue").className = "hide";
+  newButton.className = "hide"
+  saveButton.className = "btn"
+  createNodeButton.className = "btn"
 });
 createNodeButton.addEventListener("click", (e) => {
   e.preventDefault();
-  canvasContext.clearRect(
-    canvasWidth - nodeSize * 3,
-    0,
-    canvasWidth,
-    nodeSize * 3
-  );
+  canvasContext.clearRect(canvasWidth-nodewidth*5,0,canvasWidth,nodeHeight * 3);
   if (list.length > 5) {
     alert("La pila esta llena, no puedes agregar más nodos");
     return;
   }
+  createButton.className = "btn"
   document.getElementById("listNodeValue").className = "";
+  dropLastButton.className = "btn"
+  dropSpecificButton.className = "btn"
+  dropButton.className = "btn"
   lastButton.className = "btn";
-  createNodeButton.disabled = true;
-  createButton.className = "btn";
+  createNodeButton.className = "btn"
   lastButton.className = "hide";
   dropButton.disable = true;
+  dropLastButton.disable = true
+  dropSpecificButton.disable = true
+
 });
+
 
 
 //insert buttons
@@ -323,16 +319,95 @@ firstButton.addEventListener("click", (e) => {
   e.preventDefault();
   init = 0;
   insertNode(init)
+  firstButton.className = "hide"
+  lastButton.className = "hide"
+  specificButton.className = "hide"
+  insertSpecificButton.className = "hide"
+  saltButton.className = "hide"
 });
 lastButton.addEventListener("click", (e) => {
   e.preventDefault();
   final = list.length;
   insertNode(final)
+  firstButton.className = "hide"
+  lastButton.className = "hide"
+  specificButton.className = "hide"
+  insertSpecificButton.className = "hide"
+  saltButton.className = "hide"
 
 });
 insertSpecificButton.addEventListener("click", (e) => {
   e.preventDefault();
   let posicion = document.getElementById("saltButton").value -1;
+  if(posicion>list.length){
+    alert("No se peude insertar en esa posición")
+    return
+  }
   insertNode(posicion)
+  insertSpecificButton.className = "hide"
+  saltButton.className = "hide"
+  firstButton.className = "hide"
+  lastButton.className = "hide"
+  specificButton.className = "hide"
+
   
 });
+specificButton.addEventListener("click", (e) => {
+  e.preventDefault()
+  saltButton.className = ""
+  insertSpecificButton.className = "btn"
+  firstButton.className = "hide"
+  lastButton.className = "hide"
+  specificButton.className = "hide"
+
+})
+
+//drop buttons
+
+dropButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  let listAux = list;
+  if (listAux.length == 0) alert("La lista esta vacía. No hay nada que sacar");
+  else {
+    listAux.shift();
+    // localStorage.setItem("Stack", stackAux)
+    drawStack(listAux);
+  }
+});
+
+dropLastButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  let listAux = list;
+  if (listAux.length == 0) alert("La lista esta vacía. No hay nada que sacar");
+  else {
+    listAux.pop();
+    // localStorage.setItem("Stack", stackAux)
+    drawStack(listAux);
+  }
+})
+dropSpecificButton.addEventListener("click", (e) => {
+  e.preventDefault()
+  if (list.length == 0) alert("La lista esta vacía. No hay nada que sacar");
+  else {
+    dropSpecific.className = "btn"
+    dropValue.className = ""
+    dropButton.className = "hide"
+    dropLastButton.className = "hide"
+  }
+})
+dropSpecific.addEventListener("click", (e) => {
+  e.preventDefault()
+  let listAux = list;
+  let dropVal = document.getElementById("dropValue").value
+  if(dropVal > list.length){
+    alert("No existe esa posición")
+    return
+  }
+  listAux.splice(dropVal-1, 1);
+  drawStack(listAux);
+  dropSpecific.className ="hide"
+  dropValue.className = "hide"
+  dropButton.className ="btn"
+  dropLastButton.className = "btn"
+  dropSpecificButton.className = "btn"
+})
