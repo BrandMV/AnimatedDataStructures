@@ -16,6 +16,13 @@ const insertSpecificButton = document.getElementById("insertSpecificButton");
 const saltButton = document.getElementById("saltButton")
 const dropSpecific = document.getElementById("dropSpecific")
 const dropValue = document.getElementById("dropValue")
+const cCodeCreateNode = document.getElementById("cCodeCreateNode")
+const cCodefirstNode = document.getElementById("cCodefirstNode")
+const cCodeLastNode = document.getElementById("cCodeLastNode")
+const cCodeSpecificNode = document.getElementById("cCodeSpecificNode")
+const cCodeDropFirstNode = document.getElementById("cCodeDropFirstNode")
+const cCodeDropLastNode = document.getElementById("cCodeDropLastNode")
+const cCodeDropSpecificNode = document.getElementById("cCodeDropSpecificNode")
 let list = [];
 let listNodeValue = 0;
 const nodeSize = 25;
@@ -168,6 +175,13 @@ createButton.addEventListener("click", (e) => {
   lastButton.className = "btn";
   document.getElementById("listNodeValue").className = "hide";
   console.log(list.length);
+  cCodeCreateNode.className = "code"
+  cCodeDropFirstNode.className = "hide"
+  cCodeDropLastNode.className = "hide"
+  cCodeDropSpecificNode.className = "hide"
+  cCodeLastNode.className = "hide"
+  cCodeSpecificNode.className = "hide"
+  cCodefirstNode.className = "hide"
   if (list.length < 1) {
     canvasContext.beginPath(); // crearemos un nodo
     canvasContext.fillStyle = "black";
@@ -228,6 +242,7 @@ createButton.addEventListener("click", (e) => {
 });
 
 const insertNode = (position) => {
+ 
     if(list.length>=position){
       let drawNodeFrame = window.requestAnimationFrame(drawNode);
       nodeX = auxNX;
@@ -319,6 +334,13 @@ firstButton.addEventListener("click", (e) => {
   e.preventDefault();
   init = 0;
   insertNode(init)
+  cCodeCreateNode.className = "hide"
+  cCodeDropFirstNode.className = "hide"
+  cCodeDropLastNode.className = "hide"
+  cCodeDropSpecificNode.className = "hide"
+  cCodeLastNode.className = "hide"
+  cCodeSpecificNode.className = "hide"
+  cCodefirstNode.className = "code"
   firstButton.className = "hide"
   lastButton.className = "hide"
   specificButton.className = "hide"
@@ -329,6 +351,13 @@ lastButton.addEventListener("click", (e) => {
   e.preventDefault();
   final = list.length;
   insertNode(final)
+  cCodeCreateNode.className = "hide"
+  cCodeDropFirstNode.className = "hide"
+  cCodeDropLastNode.className = "hide"
+  cCodeDropSpecificNode.className = "hide"
+  cCodeLastNode.className = "code"
+  cCodeSpecificNode.className = "hide"
+  cCodefirstNode.className = "hide"
   firstButton.className = "hide"
   lastButton.className = "hide"
   specificButton.className = "hide"
@@ -344,6 +373,13 @@ insertSpecificButton.addEventListener("click", (e) => {
     return
   }
   insertNode(posicion)
+  cCodeCreateNode.className = "hide"
+  cCodeDropFirstNode.className = "hide"
+  cCodeDropLastNode.className = "hide"
+  cCodeDropSpecificNode.className = "hide"
+  cCodeLastNode.className = "hide"
+  cCodeSpecificNode.className = "code"
+  cCodefirstNode.className = "hide"
   insertSpecificButton.className = "hide"
   saltButton.className = "hide"
   firstButton.className = "hide"
@@ -372,6 +408,13 @@ dropButton.addEventListener("click", (e) => {
     listAux.shift();
     // localStorage.setItem("Stack", stackAux)
     drawStack(listAux);
+    cCodeCreateNode.className = "hide"
+    cCodeDropFirstNode.className = "code"
+    cCodeDropLastNode.className = "hide"
+    cCodeDropSpecificNode.className = "hide"
+    cCodeLastNode.className = "hide"
+    cCodeSpecificNode.className = "hide"
+    cCodefirstNode.className = "hide"
   }
 });
 
@@ -381,8 +424,14 @@ dropLastButton.addEventListener("click", (e) => {
   if (listAux.length == 0) alert("La lista esta vacía. No hay nada que sacar");
   else {
     listAux.pop();
-    // localStorage.setItem("Stack", stackAux)
     drawStack(listAux);
+    cCodeCreateNode.className = "hide"
+    cCodeDropFirstNode.className = "hide"
+    cCodeDropLastNode.className = "code"
+    cCodeDropSpecificNode.className = "hide"
+    cCodeLastNode.className = "hide"
+    cCodeSpecificNode.className = "hide"
+    cCodefirstNode.className = "hide"
   }
 })
 dropSpecificButton.addEventListener("click", (e) => {
@@ -405,6 +454,13 @@ dropSpecific.addEventListener("click", (e) => {
   }
   listAux.splice(dropVal-1, 1);
   drawStack(listAux);
+  cCodeCreateNode.className = "hide"
+  cCodeDropFirstNode.className = "hide"
+  cCodeDropLastNode.className = "hide"
+  cCodeDropSpecificNode.className = "code"
+  cCodeLastNode.className = "hide"
+  cCodeSpecificNode.className = "hide"
+  cCodefirstNode.className = "hide"
   dropSpecific.className ="hide"
   dropValue.className = "hide"
   dropButton.className ="btn"

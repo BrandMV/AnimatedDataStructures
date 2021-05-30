@@ -140,7 +140,6 @@
                   int dato;
                   struct nodo *next;
                 }Nodo;
-                Nodo* crearNodo(int dato);
 
                 Nodo *crearNodo(int dato){
                   Nodo *nuevo = NULL;
@@ -190,76 +189,78 @@
             <div class="code hide" id="cCodeSpecificNode">
               <h4>Còdigo</h4>
               <pre>
-                int insertarFinal(Nodo **cabeza, int dato){
-                  Nodo *nuevo = NULL;
-                  *nAux = *cabeza;
-                  nuevo = crearNodo(dato);
-                  if( nuevo != NULL ){
-                    while(nAux->next != NULL){
-                      nAux = nAux->next;
+                void insertarEspecifico(int pos, Nodo *lista, Nodo *elemento){
+                  Nod *temp = lista;
+                  if (pos > 1 ){
+                    for(int i = 1; i < pos-1; i++){
+                      temp = temp -> next;
                     }
-                    nAux->next = nuevo;
-                    return 1;
+                    elemento -> next = temp -> next;
+                    temp-> = elemento;
+                  }else if( pos ){
+                    temp->next = lista;
+                    lista = temp;
                   }
-                  return 0;
-
                 }
               </pre>
             </div>
             <div class="code hide" id="cCodeDropFirstNode">
               <h4>Còdigo</h4>
               <pre>
-                int insertarFinal(Nodo **cabeza, int dato){
-                  Nodo *nuevo = NULL;
-                  *nAux = *cabeza;
-                  nuevo = crearNodo(dato);
-                  if( nuevo != NULL ){
-                    while(nAux->next != NULL){
-                      nAux = nAux->next;
-                    }
-                    nAux->next = nuevo;
-                    return 1;
-                  }
-                  return 0;
-
+                void eliminarPrincipio(Lista* lista){
+                  Nodo* eliminado = lista->cabeza;
+                  lista->cabeza = lista->cabeza->next;
+                  free(eliminado);
+                  lista->longitud--;
                 }
               </pre>
             </div>
             <div class="code hide" id="cCodeDropLastNode">
               <h4>Còdigo</h4>
               <pre>
-                int insertarFinal(Nodo **cabeza, int dato){
-                  Nodo *nuevo = NULL;
-                  *nAux = *cabeza;
-                  nuevo = crearNodo(dato);
-                  if( nuevo != NULL ){
-                    while(nAux->next != NULL){
-                      nAux = nAux->next;
+                void eliminarUltimo(Lista* lista){
+                  if(lista->cabeza){
+                    if(lista->cabeza->next){
+                      Nodo *puntero = lista -> cabeza;
+                      while(puntero->next->next){
+                        puntero = puntero->next;
+                      }
+                      Nodo *eliminado = puntero -> next;
+                      puntero->next = NULL;
+                      free(eliminado);
+                      lista->longitud--;
+                    }else{
+                      Nodo *eliminado = lista->cabeza;
+                      lista->cabeza = NULL;
+                      free(eliminado);
+                      lista->longitud--;
                     }
-                    nAux->next = nuevo;
-                    return 1;
                   }
-                  return 0;
-
                 }
               </pre>
             </div>
             <div class="code hide" id="cCodeDropSpecificNode">
               <h4>Còdigo</h4>
               <pre>
-                int insertarFinal(Nodo **cabeza, int dato){
-                  Nodo *nuevo = NULL;
-                  *nAux = *cabeza;
-                  nuevo = crearNodo(dato);
-                  if( nuevo != NULL ){
-                    while(nAux->next != NULL){
-                      nAux = nAux->next;
+                void eliminarEspecifico(int n, Lista* lista){
+                  if(lista->cabeza){
+                    if(n == 0){
+                      Nodo * eliminado = lista->cabeza;
+                      lista->cabeza = lista->cabeza->next;
+                      free(eliminado);
+                    }else if(n < lista->longitud){
+                      Nodo *puntero = lista->cabeza;
+                      int posicion = 0;
+                      while(posicion < (n-1)){
+                        puntero = puntero ->next;
+                        posicion++;
+                      }
+                      Nodo* eliminado = puntero->next;
+                      puntero->next = eliminado->next;
+                      free(eliminado);
+                      lista->longitud--;
                     }
-                    nAux->next = nuevo;
-                    return 1;
                   }
-                  return 0;
-
                 }
               </pre>
             </div>
