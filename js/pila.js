@@ -23,6 +23,8 @@ let nodeY = canvasHeight - 35;
 let aux = y;
 canvasContext.font = "20px Roboto";
 let auxi=0;
+let auxNX
+let auxNY
 
 canvasContext.fillStyle='white'
 canvasContext.fill()
@@ -212,9 +214,11 @@ popButton.addEventListener("click", (e) => {
   cCodePopNode.className = "code"
     e.preventDefault()
     let stackAux = stack
+   
     if(stackAux.length == 0 )
         alert("La pila esta vacía. No hay nada que sacar")
     else{
+        auxNY = nodeY
         stackAux.pop()
         // localStorage.setItem("Stack", stackAux)
         drawStack(stackAux)

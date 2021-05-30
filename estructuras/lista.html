@@ -24,7 +24,7 @@
             id="canvas"
             width="650"
             height="700"
-            style="border: 1px solid black"
+
           ></canvas>
         </div>
   
@@ -55,11 +55,12 @@
             type="button"
             value="Crear Nodo"
             id="createNodeButton"
-            class="btn"
+            class="hide"
           />
-            <input type="button" value="Eliminar Nodo" id="dropButton" class="btn" />
+         
          
           </div>
+    
   
           <div class="thirdsButtons">
             <input
@@ -68,13 +69,13 @@
               id="listNodeValue"
               placeholder="inserta un numero"
               required
-              class=""
+              class="hide"
             />
             <input
             type="button"
             value="Crear"
             id="createButton"
-            class="btn"
+            class="hide"
           />
             
         </div>
@@ -83,38 +84,33 @@
                 type="button"
                 value="Insertar al inicio"
                 id="firstButton"
-                class="btn"
+                class="hide"
               />
               <input
               type="button"
               value="Insertar al final"
               id="lastButton"
-              class="btn"
+              class="hide"
             />
+            <input
+            type="button"
+            value="Posicion especifica"
+            id="specificButton"
+            class="hide"
+          />
            
          
         </div>
-        <input
-        type="button"
-        value="Insertar"
-        id="insert"
-        class="btn"
-        style="width: 100%"
-      />
+    
         <div style="margin-top: 1rem;">
-          <input
-          type="button"
-          value="Posicion especifica"
-          id="specificButton"
-          class="btn"
-        />
+       
         <input
         type="number"
         step="1"
         id="saltButton"
         placeholder="inserta posición"
         required
-        class=""
+        class="hide"
         style="height: 3rem; font-size: 1rem;"
       />
    
@@ -123,9 +119,14 @@
         type="button"
         value="Insertar"
         id="insertSpecificButton"
-        class="btn"
-        style="width: 100%"
+        class="hide"
+        style="width: 100%; margin-top: 15px;"
       />
+      <div class="fourthsButton">
+        <input type="button" value="Eliminar nodo al inicio" id="dropButton" class="hide" />
+        <input type="button" value="Eliminar nodo al final" id="dropButton" class="hide" />
+        <input type="button" value="Eliminar nodo especifico" id="dropButton" class="hide" />
+      </div>
         
           <br />
           <article>
@@ -156,7 +157,7 @@
                   Nodo *nuevo == NULL;
                   nuevo = crearNodo(dato);
                   if( nuevo != NULL ){
-                    nuevo->mext = *cabeza;
+                    nuevo->next = *cabeza;
                     *cabeza = nuevo;
                     return 1;
                   }
@@ -165,6 +166,82 @@
               </pre>
             </div>
             <div class="code hide" id="cCodeLastNode">
+              <h4>Còdigo</h4>
+              <pre>
+                int insertarFinal(Nodo **cabeza, int dato){
+                  Nodo *nuevo = NULL;
+                  *nAux = *cabeza;
+                  nuevo = crearNodo(dato);
+                  if( nuevo != NULL ){
+                    while(nAux->next != NULL){
+                      nAux = nAux->next;
+                    }
+                    nAux->next = nuevo;
+                    return 1;
+                  }
+                  return 0;
+
+                }
+              </pre>
+            </div>
+            <div class="code hide" id="cCodeSpecificNode">
+              <h4>Còdigo</h4>
+              <pre>
+                int insertarFinal(Nodo **cabeza, int dato){
+                  Nodo *nuevo = NULL;
+                  *nAux = *cabeza;
+                  nuevo = crearNodo(dato);
+                  if( nuevo != NULL ){
+                    while(nAux->next != NULL){
+                      nAux = nAux->next;
+                    }
+                    nAux->next = nuevo;
+                    return 1;
+                  }
+                  return 0;
+
+                }
+              </pre>
+            </div>
+            <div class="code hide" id="cCodeDropFirstNode">
+              <h4>Còdigo</h4>
+              <pre>
+                int insertarFinal(Nodo **cabeza, int dato){
+                  Nodo *nuevo = NULL;
+                  *nAux = *cabeza;
+                  nuevo = crearNodo(dato);
+                  if( nuevo != NULL ){
+                    while(nAux->next != NULL){
+                      nAux = nAux->next;
+                    }
+                    nAux->next = nuevo;
+                    return 1;
+                  }
+                  return 0;
+
+                }
+              </pre>
+            </div>
+            <div class="code hide" id="cCodeDropLastNode">
+              <h4>Còdigo</h4>
+              <pre>
+                int insertarFinal(Nodo **cabeza, int dato){
+                  Nodo *nuevo = NULL;
+                  *nAux = *cabeza;
+                  nuevo = crearNodo(dato);
+                  if( nuevo != NULL ){
+                    while(nAux->next != NULL){
+                      nAux = nAux->next;
+                    }
+                    nAux->next = nuevo;
+                    return 1;
+                  }
+                  return 0;
+
+                }
+              </pre>
+            </div>
+            <div class="code hide" id="cCodeDropSpecificNode">
               <h4>Còdigo</h4>
               <pre>
                 int insertarFinal(Nodo **cabeza, int dato){

@@ -68,7 +68,7 @@ header ul li a:hover{
 
 }
 .container{
-    margin-top: -23rem;
+    margin-top: -5rem;
 }
 .wrap{
     display: flex;
@@ -115,6 +115,9 @@ header ul li a:hover{
     font-size: 1.2rem;
     width: 100%;
     border: 1px solid #333;
+}
+#saltButton{
+    width: 100%;
 }
 .btn:disabled{
     background-color: #000b76;
